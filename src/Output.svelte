@@ -1,0 +1,31 @@
+<script>
+  import "../node_modules/bulma/css/bulma.css";
+  import { Grid } from "gridjs";
+  import { onMount } from "svelte";
+  import "gridjs/dist/theme/mermaid.css";
+  let container;
+  let columns = null;
+  export let query;
+  let tableData = null;
+  onMount(async () => {
+    console.log(query);
+    var table = document.createElement("div");
+    table.setAttribute("id", "tabledata");
+    // table.classList.add("container");
+    var fetchData = new Promise((resolve, reject) => {
+      fetch(`http://localhost:3000/query/${query}`).then((res) => {
+        resolve(res.json());
+      });
+    });
+    var data = await fetchData;
+    tableData = new Grid({
+      search: true,
+      sort: true,
+      data: JSON.parse(data),
+    });
+    tableData.render(table);
+    container.appendChild(table);
+  });
+</script>
+
+<div bind:this={container} class="output columns is-centered" />
