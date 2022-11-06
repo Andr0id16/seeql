@@ -22,10 +22,20 @@
       search: true,
       sort: true,
       data: JSON.parse(data),
+      style: {
+        th: {
+          "background-color": "hsl(206, 70%, 96%)",
+        },
+        td: {
+          "background-color": "hsl(142, 52%, 96%)",
+        },
+      },
     });
     tableData.render(table);
     container.appendChild(table);
   });
 </script>
 
-<div bind:this={container} class="output columns is-centered" />
+<div bind:this={container} class="output columns is-centered " />
+
+<!-- //select * from compartment limit 3 -->

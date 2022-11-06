@@ -8,7 +8,7 @@
   }
 </script>
 
-<div class="section columns is-centered">
+<div class="section columns is-centered ">
   <div class="query_box column is-half columns is-centered">
     <div class=" field has-addons column is-half">
       <div class="control">
