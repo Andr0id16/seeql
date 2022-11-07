@@ -1,44 +1,25 @@
 <script>
-  import { loggedInObeservable, LoginForm } from "./LoginForm.svelte";
+  import LoginForm from "./LoginForm.svelte";
   import "bulma/css/bulma.css";
+  import { loggedInObservable } from "./stores.js";
   import Main from "./Main.svelte";
   import NavBar from "./NavBar.svelte";
-  let user = {
-    username: null,
-    password: null,
-    database: null,
-    loggedIn: false,
-  };
-  let loggedIn = true;
-  $: loggedIn, console.log(loggedIn);
-  function setLoggedin() {
-    loggedIn = true;
-  }
-  function unsetLoggedin(e) {
+  function logOut(e) {
     console.log("logging out");
-    loggedIn = false;
-    user = {
-      username: null,
-      password: null,
-      database: null,
-      loggedIn: false,
-    };
+    $loggedInObservable = false;
   }
-  $: loggedIn, console.log(loggedIn);
 </script>
 
-{#key loggedIn}
-  {#if loggedIn}
-    <main>
-      <NavBar on:logout={unsetLoggedin} />
-      <Main />
-    </main>
-  {:else}
-    <main>
-      <LoginForm {user} on:login={setLoggedin} />
-    </main>
-  {/if}
-{/key}
+{#if $loggedInObservable}
+  <main>
+    <NavBar on:logout={logOut} />
+    <Main />
+  </main>
+{:else}
+  <main>
+    <LoginForm />
+  </main>
+{/if}
 
 <style>
   main {
