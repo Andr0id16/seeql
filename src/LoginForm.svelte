@@ -1,11 +1,7 @@
 <script>
   import "../node_modules/bulma/css/bulma.css";
   import { findUser } from "./login";
-  import { writable } from "svelte/store";
-  let loggedInObservable = writable(0);
-  import { createEventDispatcher } from "svelte";
-  const dispatch = createEventDispatcher();
-  export let user;
+  import { loggedInObservable } from "./stores";
   let username = null;
   let password = null;
   let database = null;
@@ -17,15 +13,8 @@
       .then((res) => res.json())
       .then((res) => {
         if (res.loginSuccessful) {
-          dispatch(
-            "login",
-            (user = {
-              username: username,
-              password: password,
-              loggedIn: true,
-            })
-          );
-          loggedInObservable.set(1);
+          console.log("logging in");
+          $loggedInObservable = 1;
         }
       })
       .catch((error) => {
