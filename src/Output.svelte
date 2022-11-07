@@ -13,15 +13,19 @@
     table.setAttribute("id", "tabledata");
     // table.classList.add("container");
     var fetchData = new Promise((resolve, reject) => {
-      fetch(`http://localhost:3000/query/${query}`).then((res) => {
-        resolve(res.json());
-      });
+      fetch(`http://localhost:3000/query/${query}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          resolve(data);
+        });
     });
-    var data = await fetchData;
     tableData = new Grid({
       search: true,
       sort: true,
-      data: JSON.parse(data),
+      data: await fetchData,
       style: {
         th: {
           "background-color": "hsl(206, 70%, 96%)",

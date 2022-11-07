@@ -1,5 +1,5 @@
 <script>
-  import LoginForm from "./LoginForm.svelte";
+  import { loggedInObeservable, LoginForm } from "./LoginForm.svelte";
   import "bulma/css/bulma.css";
   import Main from "./Main.svelte";
   import NavBar from "./NavBar.svelte";
