@@ -12,6 +12,7 @@
     { value: "Distributor", label: "Distributor" },
     { value: "Retailer", label: "Retailer" },
     { value: "Product", label: "Product" },
+    { value: "Supply", label: "Supply" },
   ];
 
   let value = { value: "Distributor", label: "Distributor" };
@@ -20,7 +21,8 @@
     console.log("selected item", event.detail);
     if (event.detail.value === "Distributor") $selectedTable = 1;
     else if (event.detail.value === "Retailer") $selectedTable = 2;
-    else $selectedTable = 3;
+    else if (event.detail.value === "Product") $selectedTable = 3;
+    else $selectedTable = 4;
   }
 </script>
 

@@ -10,8 +10,7 @@
   }
 </script>
 
-<!-- {#if $loggedInObservable} -->
-{#if true}
+{#if $loggedInObservable}
   <nav>
     <NavBar on:logout={logOut} />
   </nav>

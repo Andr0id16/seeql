@@ -7,6 +7,7 @@
   import Retailer from "./Retailer.svelte";
   import Distributor from "./Distributor.svelte";
   import Product from "./Product.svelte";
+  import Supply from "./Supply.svelte";
 
   function runQuery(e) {
     query = e.detail.query;
@@ -28,10 +29,14 @@
       <Retailer operation={"insert"} on:runQuery={runQuery} />
       <Retailer operation={"update"} on:runQuery={runQuery} />
       <Retailer operation={"delete"} on:runQuery={runQuery} />
-    {:else}
+    {:else if $selectedTable == 3}
       <Product operation={"insert"} on:runQuery={runQuery} />
       <Product operation={"update"} on:runQuery={runQuery} />
       <Product operation={"delete"} on:runQuery={runQuery} />
+    {:else}
+      <Supply operation={"insert"} on:runQuery={runQuery} />
+      <Supply operation={"update"} on:runQuery={runQuery} />
+      <Supply operation={"delete"} on:runQuery={runQuery} />
     {/if}
   </div>
 

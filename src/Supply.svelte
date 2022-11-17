@@ -1,8 +1,10 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  let sup_id;
   let dist_id;
-  let dist_name;
-  let location;
+  let prod_id;
+
+  let quantity;
   const dispatch = createEventDispatcher();
   export let operation;
   let query = null;
@@ -12,17 +14,27 @@
   function generateOperationQuery(e) {
     e.preventDefault();
     if (operation === "insert") {
-      query = `insert into distributor values(${dist_id},${dist_name},${location})`;
+      query = `insert into supply values(${sup_id},${dist_id},${prod_id},${quantity},)`;
     } else if (operation === "update") {
-      query = `update distributor set name=${dist_name},location=${location} where dist_id=${dist_id}`;
+      query = `update supply set dist_id=${sup_id},prod_id_id=${prod_id},quantity=${quantity} where sup_id=${sup_id}`;
     } else {
-      query = `delete from distributor where dist_id=${dist_id}`;
+      query = `delete from supply where sup_id=${sup_id}`;
     }
     sendQuery(query);
   }
 </script>
 
-<form class="dist_form">
+<form class="sup_form">
+  <div>
+    <input
+      bind:value={sup_id}
+      name="sup_id"
+      type="text"
+      class="input is-primary"
+      placeholder="Supply Id"
+      required
+    />
+  </div>
   <div>
     <input
       bind:value={dist_id}
@@ -35,25 +47,24 @@
   </div>
   <div>
     <input
-      bind:value={dist_name}
-      name="dist_name"
+      bind:value={prod_id}
+      name="prod_id"
       type="text"
       class="input is-primary"
-      placeholder="Distributor Name"
+      placeholder="Product Id"
       required
     />
   </div>
   <div>
     <input
-      bind:value={location}
-      name="location"
-      type="text"
+      bind:value={quantity}
+      name="quantity"
+      type="int"
       class="input is-primary"
-      placeholder="Location"
+      placeholder="Quantity"
       required
     />
   </div>
-
   <div>
     <button on:click={generateOperationQuery} class="button is-link is-dark"
       >{operation}</button
@@ -63,7 +74,7 @@
 </form>
 
 <style>
-  .dist_form {
+  .sup_form {
     padding: 20px;
     border-radius: 4px;
   }

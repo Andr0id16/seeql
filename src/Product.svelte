@@ -2,6 +2,8 @@
   import { createEventDispatcher } from "svelte";
   let prod_id;
   let prod_name;
+  let prod_mrp;
+  let prod_type;
   const dispatch = createEventDispatcher();
   export let operation;
   let query = null;
@@ -11,9 +13,9 @@
   function generateOperationQuery(e) {
     e.preventDefault();
     if (operation === "insert") {
-      query = `operation into product values(${prod_id},${prod_name})`;
+      query = `insert into product values(${prod_id},"${prod_name},${prod_type},${prod_mrp}")`;
     } else if (operation === "update") {
-      query = `update product set name=${prod_name} where prod_id=${prod_id}`;
+      query = `update product set prod_name=${prod_name},prod_type="${prod_type},prod_mrp=${prod_mrp} where prod_id=${prod_id}`;
     } else {
       query = `delete from product where prod_id=${prod_id}`;
     }
@@ -39,6 +41,26 @@
       type="text"
       class="input is-primary"
       placeholder="Product Name"
+      required
+    />
+  </div>
+  <div>
+    <input
+      bind:value={prod_type}
+      name="prod_type"
+      type="text"
+      class="input is-primary"
+      placeholder="Product type"
+      required
+    />
+  </div>
+  <div>
+    <input
+      bind:value={prod_mrp}
+      name="prod_mrp"
+      type="int"
+      class="input is-primary"
+      placeholder="Product MRP"
       required
     />
   </div>
