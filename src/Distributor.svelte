@@ -12,9 +12,9 @@
   function generateOperationQuery(e) {
     e.preventDefault();
     if (operation === "insert") {
-      query = `insert into distributor values(${dist_id},${dist_name},${location})`;
+      query = `insert into distributor values(${dist_id},"${dist_name}","${location}")`;
     } else if (operation === "update") {
-      query = `update distributor set name=${dist_name},location=${location} where dist_id=${dist_id}`;
+      query = `update distributor set dist_name="${dist_name}",location="${location}" where dist_id=${dist_id}`;
     } else {
       query = `delete from distributor where dist_id=${dist_id}`;
     }

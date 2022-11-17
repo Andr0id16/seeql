@@ -11,9 +11,9 @@
   }
   function generateOperationQuery() {
     if (operation === "insert") {
-      query = `insert into retailer values(${ret_id},${ret_name},${location})`;
+      query = `insert into retailer values(${ret_id},"${ret_name}","${location}")`;
     } else if (operation === "update") {
-      query = `update retailer set name=${ret_name},location=${location} where ret_id=${ret_id}`;
+      query = `update retailer set name="${ret_name}",location="${location}" where ret_id=${ret_id}`;
     } else {
       query = `delete from retailer where ret_id=${ret_id}`;
     }

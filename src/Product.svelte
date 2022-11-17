@@ -13,9 +13,9 @@
   function generateOperationQuery(e) {
     e.preventDefault();
     if (operation === "insert") {
-      query = `insert into product values(${prod_id},"${prod_name},${prod_type},${prod_mrp}")`;
+      query = `insert into product values(${prod_id},"${prod_name}","${prod_type}",${prod_mrp})`;
     } else if (operation === "update") {
-      query = `update product set prod_name=${prod_name},prod_type="${prod_type},prod_mrp=${prod_mrp} where prod_id=${prod_id}`;
+      query = `update product set prod_name="${prod_name}",prod_type="${prod_type}",prod_mrp=${prod_mrp} where prod_id=${prod_id}`;
     } else {
       query = `delete from product where prod_id=${prod_id}`;
     }
