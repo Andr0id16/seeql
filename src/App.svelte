@@ -10,9 +10,12 @@
   }
 </script>
 
-{#if $loggedInObservable}
-  <main>
+<!-- {#if $loggedInObservable} -->
+{#if true}
+  <nav>
     <NavBar on:logout={logOut} />
+  </nav>
+  <main>
     <Main />
   </main>
 {:else}

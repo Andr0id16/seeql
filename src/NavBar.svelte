@@ -1,13 +1,35 @@
 <script>
   import "bulma/css/bulma.css";
+  import { selectedTable } from "./stores";
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
   function logout(e) {
     dispatch("logout");
   }
+  import Select from "svelte-select";
+
+  let items = [
+    { value: "Distributor", label: "Distributor" },
+    { value: "Retailer", label: "Retailer" },
+    { value: "Product", label: "Product" },
+  ];
+
+  let value = { value: "Distributor", label: "Distributor" };
+
+  function handleSelect(event) {
+    console.log("selected item", event.detail);
+    if (event.detail.value === "Distributor") $selectedTable = 1;
+    else if (event.detail.value === "Retailer") $selectedTable = 2;
+    else $selectedTable = 3;
+  }
 </script>
 
-<nav class="navbar">
+<nav class="navbar has-background-success-light">
+  <div class="navbar-item">
+    <div class="tables">
+      <Select {items} {value} on:select={handleSelect} />
+    </div>
+  </div>
   <div class="navbar-end">
     <div class="navbar-item">
       <div class="buttons">
@@ -20,4 +42,10 @@
 </nav>
 
 <style>
+  .tables {
+    width: 200px !important;
+  }
+  .navbar {
+    margin-bottom: 20px;
+  }
 </style>

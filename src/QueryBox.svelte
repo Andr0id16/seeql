@@ -8,22 +8,30 @@
   }
 </script>
 
-<div class="section columns is-centered ">
-  <div class="query_box column is-half columns is-centered">
-    <div class=" field has-addons column is-half">
-      <div class="control">
-        <input
-          bind:value={query}
-          class="input is-medium"
-          type="text"
-          placeholder="Run a Query..."
-        />
-      </div>
-      <div class="control">
-        <button class="button is-medium is-primary" on:click={sendQuery}>
-          run
-        </button>
-      </div>
+<div class="query_box_container has-background-success-light">
+  <div class="field has-addons">
+    <div class="control">
+      <input
+        bind:value={query}
+        class="query_box_input input is-medium"
+        type="text"
+        placeholder="Run a Query..."
+      />
+    </div>
+    <div class="control">
+      <button class="button is-medium is-primary" on:click={sendQuery}>
+        run
+      </button>
     </div>
   </div>
 </div>
+
+<style>
+  .query_box_container {
+    margin: 20px;
+  }
+
+  .query_box_input {
+    width: 400px;
+  }
+</style>
