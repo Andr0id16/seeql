@@ -1,10 +1,12 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  let sup_id;
+  let order_id;
+  let csfa_id;
   let dist_id;
   let prod_id;
+  let order_quantity;
+  let order_cost;
 
-  let quantity;
   const dispatch = createEventDispatcher();
   export let operation;
   let query = null;
@@ -14,24 +16,35 @@
   function generateOperationQuery(e) {
     e.preventDefault();
     if (operation === "insert") {
-      query = `insert into supply values(${sup_id},${dist_id},${prod_id},${quantity},)`;
+      query = `insert into orders values(${order_id},${csfa_id},${dist_id},${prod_id},${order_quantity},${order_cost})`;
     } else if (operation === "update") {
-      query = `update supply set dist_id=${sup_id},prod_id_id=${prod_id},quantity=${quantity} where sup_id=${sup_id}`;
+      query = `update orders set csfa_id=${csfa_id},dist_id=${dist_id},prod_id=${prod_id},order_quantity=${order_quantity},order_cost=${order_cost} where order_id=${order_id}`;
     } else {
-      query = `delete from supply where sup_id=${sup_id}`;
+      query = `delete from orders where order_id=${order_id}`;
     }
     sendQuery(query);
   }
 </script>
 
-<form class="sup_form">
+<form class="order_form">
   <div>
     <input
-      bind:value={sup_id}
-      name="sup_id"
+      bind:value={order_id}
+      name="order_id"
       type="text"
       class="input is-primary"
-      placeholder="Supply Id"
+      placeholder="Order Id"
+      required
+    />
+  </div>
+
+  <div>
+    <input
+      bind:value={csfa_id}
+      name="csfa_id"
+      type="text"
+      class="input is-primary"
+      placeholder="CSFA Id"
       required
     />
   </div>
@@ -57,11 +70,21 @@
   </div>
   <div>
     <input
-      bind:value={quantity}
-      name="quantity"
-      type="int"
+      bind:value={order_quantity}
+      name="order_quantity"
+      type="text"
       class="input is-primary"
       placeholder="Quantity"
+      required
+    />
+  </div>
+  <div>
+    <input
+      bind:value={order_cost}
+      name="order_cost"
+      type="text"
+      class="input is-primary"
+      placeholder="Cost"
       required
     />
   </div>
@@ -74,7 +97,7 @@
 </form>
 
 <style>
-  .sup_form {
+  .order_form {
     padding: 20px;
     border-radius: 4px;
   }

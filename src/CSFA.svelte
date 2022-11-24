@@ -1,8 +1,8 @@
 <script>
   import { createEventDispatcher } from "svelte";
-  let ret_id;
-  let ret_name;
-  let location;
+  let csfa_id;
+  let csfa_name;
+  let csfa_location;
   const dispatch = createEventDispatcher();
   export let operation;
   let query = null;
@@ -11,41 +11,41 @@
   }
   function generateOperationQuery() {
     if (operation === "insert") {
-      query = `insert into retailer values(${ret_id},"${ret_name}","${location}")`;
+      query = `insert into CSFA values(${csfa_id},"${csfa_name}","${csfa_location}")`;
     } else if (operation === "update") {
-      query = `update retailer set name="${ret_name}",location="${location}" where ret_id=${ret_id}`;
+      query = `update CSFA set csfa_name="${csfa_name}",csfa_location="${csfa_location}" where csfa_id=${csfa_id}`;
     } else {
-      query = `delete from retailer where ret_id=${ret_id}`;
+      query = `delete from CSFA where csfa_id=${csfa_id}`;
     }
     sendQuery(query);
   }
 </script>
 
-<form class="ret_form">
+<form class="csfa_form">
   <div>
     <input
-      bind:value={ret_id}
-      name="ret_id"
+      bind:value={csfa_id}
+      name="csfa_id"
       type="text"
       class="input is-primary"
-      placeholder="Retailer Id"
+      placeholder="CSFA Id"
       required
     />
   </div>
   <div>
     <input
-      bind:value={ret_name}
-      name="ret_name"
+      bind:value={csfa_name}
+      name="csfa_name"
       type="text"
       class="input is-primary"
-      placeholder="Retailer Name"
+      placeholder="CSFA Name"
       required
     />
   </div>
   <div>
     <input
-      bind:value={location}
-      name="location"
+      bind:value={csfa_location}
+      name="csfa_location"
       type="text"
       class="input is-primary"
       placeholder="Location"
@@ -62,7 +62,7 @@
 </form>
 
 <style>
-  .ret_form {
+  .csfa_form {
     padding: 20px;
     border-radius: 4px;
   }

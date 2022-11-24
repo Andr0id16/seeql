@@ -11,6 +11,7 @@
 </script>
 
 {#if $loggedInObservable}
+  <!-- {#if true} -->
   <nav>
     <NavBar on:logout={logOut} />
   </nav>

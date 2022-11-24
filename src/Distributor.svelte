@@ -2,7 +2,10 @@
   import { createEventDispatcher } from "svelte";
   let dist_id;
   let dist_name;
-  let location;
+  let dist_ph;
+  let dist_email;
+  let dist_location;
+  let dist_capacity;
   const dispatch = createEventDispatcher();
   export let operation;
   let query = null;
@@ -12,11 +15,11 @@
   function generateOperationQuery(e) {
     e.preventDefault();
     if (operation === "insert") {
-      query = `insert into distributor values(${dist_id},"${dist_name}","${location}")`;
+      query = `insert into Distributor values(${dist_id},"${dist_name}","${dist_ph}","${dist_email}","${dist_location}",${dist_capacity})`;
     } else if (operation === "update") {
-      query = `update distributor set dist_name="${dist_name}",location="${location}" where dist_id=${dist_id}`;
+      query = `update Distributor set dist_name="${dist_name}",dist_ph="${dist_ph}",dist_email="${dist_email}",dist_location="${dist_location}",dist_capacity=${dist_capacity} where dist_id=${dist_id}`;
     } else {
-      query = `delete from distributor where dist_id=${dist_id}`;
+      query = `delete from Distributor where dist_id=${dist_id}`;
     }
     sendQuery(query);
   }
@@ -45,15 +48,44 @@
   </div>
   <div>
     <input
-      bind:value={location}
-      name="location"
+      bind:value={dist_ph}
+      name="dist_ph"
+      type="text"
+      class="input is-primary"
+      placeholder="Phone"
+      required
+    />
+  </div>
+  <div>
+    <input
+      bind:value={dist_email}
+      name="dist_email"
+      type="email"
+      class="input is-primary"
+      placeholder="Email"
+      required
+    />
+  </div>
+  <div>
+    <input
+      bind:value={dist_location}
+      name="dist_location"
       type="text"
       class="input is-primary"
       placeholder="Location"
       required
     />
   </div>
-
+  <div>
+    <input
+      bind:value={dist_capacity}
+      name="dist_capacity"
+      type="text"
+      class="input is-primary"
+      placeholder="Capacity"
+      required
+    />
+  </div>
   <div>
     <button on:click={generateOperationQuery} class="button is-link is-dark"
       >{operation}</button

@@ -1,9 +1,9 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  let csfa_stock_id;
+  let csfa_stock_quantity;
+  let csfa_id;
   let prod_id;
-  let prod_name;
-  let prod_mrp;
-  let prod_type;
   const dispatch = createEventDispatcher();
   export let operation;
   let query = null;
@@ -13,17 +13,47 @@
   function generateOperationQuery(e) {
     e.preventDefault();
     if (operation === "insert") {
-      query = `insert into Product values(${prod_id},"${prod_name}","${prod_type}",${prod_mrp})`;
+      query = `insert into csfa_stock values(${csfa_stock_id},${csfa_stock_quantity},${csfa_id},${prod_id}})`;
     } else if (operation === "update") {
-      query = `update Product set prod_name="${prod_name}",prod_type="${prod_type}",prod_mrp=${prod_mrp} where prod_id=${prod_id}`;
+      query = `update csfa_stock set csfa_stock_quantity=${csfa_stock_quantity},csfa_id=${csfa_id},prod_id=${prod_id} where csfa_stock_id=${csfa_stock_id}`;
     } else {
-      query = `delete from Product where prod_id=${prod_id}`;
+      query = `delete from csfa_stock where csfa_stock_id=${csfa_stock_id}`;
     }
     sendQuery(query);
   }
 </script>
 
-<form class="prod_form">
+<form class="csfa_stock_form">
+  <div>
+    <input
+      bind:value={csfa_stock_id}
+      name="csfa_stock_id"
+      type="text"
+      class="input is-primary"
+      placeholder="CSFA Stock Id"
+      required
+    />
+  </div>
+  <div>
+    <input
+      bind:value={csfa_stock_quantity}
+      name="csfa_stock_quantity"
+      type="text"
+      class="input is-primary"
+      placeholder="CSFA Stock Quantity"
+      required
+    />
+  </div>
+  <div>
+    <input
+      bind:value={csfa_id}
+      name="csfa_id"
+      type="text"
+      class="input is-primary"
+      placeholder="CSFA Id"
+      required
+    />
+  </div>
   <div>
     <input
       bind:value={prod_id}
@@ -31,36 +61,6 @@
       type="text"
       class="input is-primary"
       placeholder="Product Id"
-      required
-    />
-  </div>
-  <div>
-    <input
-      bind:value={prod_name}
-      name="prod_name"
-      type="text"
-      class="input is-primary"
-      placeholder="Product Name"
-      required
-    />
-  </div>
-  <div>
-    <input
-      bind:value={prod_type}
-      name="prod_type"
-      type="text"
-      class="input is-primary"
-      placeholder="Product type"
-      required
-    />
-  </div>
-  <div>
-    <input
-      bind:value={prod_mrp}
-      name="prod_mrp"
-      type="int"
-      class="input is-primary"
-      placeholder="Product MRP"
       required
     />
   </div>
@@ -73,7 +73,7 @@
 </form>
 
 <style>
-  .prod_form {
+  .csfa_stock_form {
     padding: 20px;
     border-radius: 4px;
   }
